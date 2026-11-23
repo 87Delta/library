@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body class="library-hero">
+    <h1 id="title"></h1>
+    <div class="top-links">
+        <div id="sandwich">
+            <a href="../pages/about.html">About</a>
+            <a href="../pages/why.html">Why</a>
+            <a href="../pages/contact.html">Contact</a>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="sandwichBar()">
+        <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div id="account">
+            <a id="signUpBtn" href="javascript:void(0)" onclick="signUpBtnClick()">Sign-up</a>
+            <a id="logInBtn" href="javascript:void(0)"  onclick="logInBtnClick()">Log-in</a>
+    </div>
+    <div class="signupCard">
+        <form id="signUpCard">
+            <h3>Create Your Library Card</h3>
+            <label for="Fname">Username</label>
+            <input id="Fname" type="text" placeholder="Username" required><br>
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="password123" required><br>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="JoeDoe@gmail.com" required>
+            <br>
+            <button id="subBtn" form_id="signUpCard" type="submit">Create</button></br>
+            <small>Have an account?<a onclick="logInBtnClick()">Log-in</a></small>
+        </form>
+    </div>
+    <div class="loginCard">
+        <form id="logInCard">
+            <h3>Enter Your Library</h3>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="JoeDoe@gmail.com" required><br>
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="password123" required>
+            <br>
+            <button id="subBtn" form_id="signUpCard" type="submit">Create</button></br>
+            <small>Don't have an account?<a onclick="signUpBtnClick()">Sign-up</a></small>
+        </form>
+    </div>
+</body>
+<script src="../scripts/script.js"></script>
+</html>

@@ -1,0 +1,14 @@
+  //Form class
+  //Form IDs - trash JS that I was using to display the card information
+  /* document.getElementById("signUpCard").style.width = "100%";
+  document.getElementById("signUpCard").style.height = "52px";
+  document.getElementById("signUpCard").style.marginBottom = "20px";
+  document.getElementById("signUpCard").style.padding = "0 20px";
+  document.getElementById("signUpCard").style.border = "none";
+  document.getElementById("signUpCard").style.borderRadius = "14px";
+  document.getElementById("signUpCard").style.font = "inherit";
+  document.getElementById("signUpCard").style.color = "#3d4468";
+  document.getElementById("signUpCard").style.placeItems ="center";
+  document.getElementById("signUpCard").style.background = "#e0e5ec";
+  document.getElementById("signUpCard").style.boxShadow = "9px 9px 18px #a3b1c6, -9px -9px 18px #fff";
+*/
