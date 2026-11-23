@@ -56,3 +56,112 @@ function changeBackground () {
 }
 
 changeBackground();
+
+//For animation of the leaves - Wind element written by AI 
+const container = document.getElementById("leaf-container");
+
+const leafImages = [
+'url("../assests/images/leaf-orange.png")',
+'url("../assests/images/leaf-red.png")',
+'url("../assests/images/leaf-green.jpg")',
+'url("../assests/images/leaf-gold.jpg")',
+'url("../assests/images/leaf-pink.png")'
+];
+
+const leaves = [];
+let wind = 0;
+let targetWind = 0;
+
+// Track mouse position for cursor wind push
+const mouse = { x: -1000, y: -1000 };
+window.addEventListener("mousemove", (e) => {
+mouse.x = e.clientX;
+mouse.y = e.clientY;
+});
+
+// Periodically change wind direction and strength (gusts)
+function updateWind() {
+// Random breeze between -1.5 (left) and +2.5 (right)
+targetWind = (Math.random() - 0.35) * 3.5;
+
+// Schedule next wind shift in 2 to 5 seconds
+setTimeout(updateWind, Math.random() * 3000 + 2000);
+}
+updateWind();
+
+function spawnLeaf() {
+const el = document.createElement("img");
+el.src = leafImages[Math.floor(Math.random() * leafImages.length)];
+el.classList.add("falling-leaf");
+
+const size = Math.floor(Math.random() * 24) + 24; // 24px to 48px
+el.style.width = `${size}px`;
+el.style.height = "auto";
+container.appendChild(el);
+
+leaves.push({
+  el,
+  // Spawn slightly wider than viewport so wind doesn't leave empty edges
+  x: Math.random() * (window.innerWidth + 200) - 100,
+  y: -50,
+  vx: 0,
+  vy: Math.random() * 1.2 + 1.2, // Fall speed
+  rotation: Math.random() * 360,
+  rotationSpeed: (Math.random() - 0.5) * 3,
+  swayOffset: Math.random() * Math.PI * 2,
+  swaySpeed: Math.random() * 0.03 + 0.02,
+  // Lighter/smaller leaves get pushed harder by wind
+  windFactor: (48 / size) * 0.6
+});
+}
+
+function animate() {
+// Smoothly interpolate current wind toward target gust
+wind += (targetWind - wind) * 0.015;
+
+for (let i = leaves.length - 1; i >= 0; i--) {
+  const leaf = leaves[i];
+
+  // 1. Natural sine-wave flutter
+  leaf.swayOffset += leaf.swaySpeed;
+  const flutter = Math.sin(leaf.swayOffset) * 1.2;
+
+  // 2. Apply wind force based on leaf weight/size
+  const windPush = wind * leaf.windFactor;
+
+  // 3. Cursor repulsion (swirl leaves away from pointer)
+  const dx = leaf.x - mouse.x;
+  const dy = leaf.y - mouse.y;
+  const dist = Math.hypot(dx, dy);
+  if (dist < 120) {
+    const force = (120 - dist) / 120;
+    leaf.vx += (dx / dist) * force * 0.6;
+    leaf.vy += (dy / dist) * force * 0.3;
+  }
+
+  // Apply friction to extra velocity
+  leaf.vx *= 0.94;
+  // Restore steady downward fall speed if pushed upward
+  leaf.vy += (1.5 - leaf.vy) * 0.02;
+
+  // Update position and rotation
+  leaf.x += flutter + windPush + leaf.vx;
+  leaf.y += leaf.vy;
+  leaf.rotation += leaf.rotationSpeed + windPush * 1.5;
+
+  // Render via GPU transform
+  leaf.el.style.transform = `translate3d(${leaf.x}px, ${leaf.y}px, 0) rotate(${leaf.rotation}deg)`;
+
+  // Remove leaf once it falls below screen
+  if (leaf.y > window.innerHeight + 60) {
+    leaf.el.remove();
+    leaves.splice(i, 1);
+  }
+}
+
+requestAnimationFrame(animate);
+}
+
+// Start animation loop and spawn timer
+animate();
+setInterval(spawnLeaf, 400);
