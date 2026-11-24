@@ -78,12 +78,16 @@ body {
 
 /* SIGNUP CARD CONTAINER */
 .signupCard{
+  position: relative;
+  z-index: 10;
   display: none;
   place-items: center;
   padding: 30px 15px;
 }
 
 .loginCard{
+  position: relative;
+  z-index: 10;
   display: none;
   place-items: center;
   padding: 30px 15px;
@@ -276,7 +280,7 @@ inset -5px -5px 10px #ffffff;
   height: 100vh;
   pointer-events: none;
   overflow: hidden;
-  z-index: 9999;
+  z-index: 2;
 }
 
 .falling-leaf {

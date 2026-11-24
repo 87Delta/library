@@ -1,14 +1,23 @@
 const canvas = document.getElementById("dragonCanvas");
 const ctx = canvas.getContext("2d");
 
-const W = 680;
-const H = 340;
+let W = 0;
+let H = 0;
+
+function resizeCanvas() {
+    const pixelRatio = window.devicePixelRatio || 1;
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.round(W * pixelRatio);
+    canvas.height = Math.round(H * pixelRatio);
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
 let dragons = [];
 let paused = false;
-
-let flightCount = 0;
-let fireCount = 0;
 
 let speed = 1;
 let lastTime = 0;
@@ -46,10 +55,11 @@ const colors = [
 function spawnDragon() {
 const direction =
     Math.random() < 0.5 ? 1 : -1;
+const verticalInset = Math.min(90, H / 2);
 const dragon = {
     x: direction === 1 ? -140 : W + 140,
 
-    y: random(75, 245),
+    y: random(verticalInset, H - verticalInset),
 
     direction,
 
@@ -68,10 +78,6 @@ const dragon = {
     ]
 };
 dragons.push(dragon);
-flightCount++;
-document.getElementById(
-    "flightCount"
-).textContent = flightCount;
 }
 
 // Drawing helper
@@ -106,7 +112,11 @@ dragon.x +=
     dragon.direction * dt * 66 * speed;
 
 dragon.y += dragon.vy;
-if (dragon.y < 55 || dragon.y > 260) {
+const verticalInset = Math.min(90, H / 2);
+if (
+    dragon.y < verticalInset ||
+    dragon.y > H - verticalInset
+) {
     dragon.vy *= -1;
 }
 
@@ -120,12 +130,6 @@ if (
     dragon.fire = 0.85;
 
     dragon.fireWait = random(2, 5);
-
-    fireCount++;
-
-    document.getElementById(
-        "fireCount"
-    ).textContent = fireCount;
 }
 if (dragon.fire > 0) {
     dragon.fire -= dt;
@@ -399,8 +403,9 @@ ctx.clearRect(0, 0, W, H);
 }
 
 // Main animation loop
-function animate(time) {
-requestAnimationFrame(animate);
+function animateDragons(time) {
+
+requestAnimationFrame(animateDragons);
 const dt = Math.min(
     (time - lastTime) / 1000,
     0.05
@@ -426,8 +431,8 @@ dragons.forEach(dragon => {
 
 // Remove dragons outside the screen
 dragons = dragons.filter(dragon =>
-    dragon.x > -170 &&
-    dragon.x < W + 170
+    dragon.x > -180 &&
+    dragon.x < W + 180
 );
 }
 
@@ -436,4 +441,4 @@ spawnDragon();
 
 nextSpawn = performance.now() + 85000;
 
-requestAnimationFrame(animate);
+requestAnimationFrame(animateDragons);
