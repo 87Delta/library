@@ -43,29 +43,31 @@ const timeOfDay = new Date().getHours();
 const libraryBackground = document.querySelector('.library-hero')
 
 function changeBackground () {
-  if (timeOfDay >= 7 && timeOfDay < 17 ) {
-    libraryBackground.style.backgroundImage = 'url("../assests/images/libraryFullCover_Day.png"'
-  }
-  else if (timeOfDay >= 20 || timeOfDay < 7){
-    libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_night.png"'
-  }
-  else {
-  libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_morning_afternoon.jpg"'
-  console.log("im here")
-  }
+if (timeOfDay >= 7 && timeOfDay < 17 ) {
+  libraryBackground.style.backgroundImage = 'url("../assests/images/libraryFullCover_Day.png")'
+}
+
+else if (timeOfDay >= 18 || timeOfDay < 6) {
+  libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_night.png")'
+  //document.querySelectorAll(".toplinks a").style.color = "white"; needs to be updated to change text so that it is visible
+}
+
+else {
+  libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_morning_afternoon.jpg")'
+}
 }
 
 changeBackground();
 
 //For animation of the leaves - Wind element written by AI 
-const container = document.getElementById("leaf-container");
+const container = document.querySelector("#leaf-container");
 
 const leafImages = [
-'url("../assests/images/leaf-orange.png")',
-'url("../assests/images/leaf-red.png")',
-'url("../assests/images/leaf-green.jpg")',
-'url("../assests/images/leaf-gold.jpg")',
-'url("../assests/images/leaf-pink.png")'
+"../assests/images/leaf-orange.png",
+"../assests/images/leaf-red.png",
+"../assests/images/leaf-green.png",
+"../assests/images/leaf-gold.png",
+"../assests/images/leaf-pink.png"
 ];
 
 const leaves = [];

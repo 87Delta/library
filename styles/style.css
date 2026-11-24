@@ -76,27 +76,6 @@ body {
               -4px -4px 8px #ffffff;
 }
 
-
-/*#up{
-  display: block;
-  background-color: antiquewhite;
-  width: fit-content;
-  padding: .2em;
-  margin: 5px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-#in{
-  display: block;
-  background-color: antiquewhite;
-  width: fit-content;
-  padding: .2em;
-  margin: 5px;
-  border-radius: 5px;
-  text-decoration: none;
-}*/
-
 /* SIGNUP CARD CONTAINER */
 .signupCard{
   display: none;
@@ -120,8 +99,8 @@ body {
   background: #e0e5ec;
   opacity: 95%;
   box-shadow:
-      12px 12px 24px #bec5d0,
-      -12px -12px 24px #ffffff;
+  12px 12px 24px #bec5d0,
+  -12px -12px 24px #ffffff;
 }
 
 #logInCard{
@@ -185,8 +164,8 @@ body {
   font-size: 17px;
 
   box-shadow:
-      inset 6px 6px 10px #bec5d0,
-      inset -6px -6px 10px #ffffff;
+  inset 6px 6px 10px #bec5d0,
+  inset -6px -6px 10px #ffffff;
 }
 
 #logInCard input {
@@ -205,8 +184,8 @@ body {
   font-size: 17px;
 
   box-shadow:
-      inset 6px 6px 10px #bec5d0,
-      inset -6px -6px 10px #ffffff;
+  inset 6px 6px 10px #bec5d0,
+  inset -6px -6px 10px #ffffff;
 }
 
 /* INPUT FOCUS */
@@ -241,8 +220,8 @@ body {
   font-weight: bold;
   cursor: pointer;
   box-shadow:
-    7px 7px 14px #bec5d0,
-    -7px -7px 14px #ffffff;
+  7px 7px 14px #bec5d0,
+  -7px -7px 14px #ffffff;
 }
 
 #subBtn:hover {
@@ -251,8 +230,8 @@ body {
 
 #subBtn:active {
 box-shadow:
-  inset 5px 5px 10px #bec5d0,
-  inset -5px -5px 10px #ffffff;
+inset 5px 5px 10px #bec5d0,
+inset -5px -5px 10px #ffffff;
 }
 
 /* LOGIN LINK */
