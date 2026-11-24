@@ -36,24 +36,31 @@ function displayLogIn(){
 
 //handles change library Name
 function userLibrary(){
+
 }
+
 
 //change background image to match time of day
 const timeOfDay = new Date().getHours();
 const libraryBackground = document.querySelector('.library-hero')
+const imageBase = new URL("../assests/images/", document.currentScript.src);
+const imageUrl = (filename) => new URL(filename, imageBase).href;
 
 function changeBackground () {
 if (timeOfDay >= 7 && timeOfDay < 17 ) {
-  libraryBackground.style.backgroundImage = 'url("../assests/images/libraryFullCover_Day.png")'
+  //libraryBackground.style.backgroundImage = 'url("../assests/images/libraryFullCover_Day.png")'
+  libraryBackground.style.backgroundImage = `url("${imageUrl("libraryFullCover_Day.png")}")`;
 }
 
 else if (timeOfDay >= 18 || timeOfDay < 6) {
-  libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_night.png")'
+  //libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_night.png")'
+  libraryBackground.style.backgroundImage = `url("${imageUrl("frontLibrary_night.png")}")`;
   //document.querySelectorAll(".toplinks a").style.color = "white"; needs to be updated to change text so that it is visible
 }
 
 else {
-  libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_morning_afternoon.jpg")'
+  //libraryBackground.style.backgroundImage = 'url("../assests/images/frontLibrary_morning_afternoon.jpg")'
+  libraryBackground.style.backgroundImage = `url("${imageUrl("frontLibrary_morning_afternoon.jpg")}")`;
 }
 }
 
@@ -63,11 +70,16 @@ changeBackground();
 const container = document.querySelector("#leaf-container");
 
 const leafImages = [
-"../assests/images/leaf-orange.png",
-"../assests/images/leaf-red.png",
-"../assests/images/leaf-green.png",
-"../assests/images/leaf-gold.png",
-"../assests/images/leaf-pink.png"
+//"../assests/images/leaf-orange.png",
+imageUrl("leaf-orange.png"),
+//"../assests/images/leaf-red.png",
+imageUrl("leaf-red.png"),
+//"../assests/images/leaf-green.png",
+imageUrl("leaf-green.png"),
+//"../assests/images/leaf-gold.png",
+imageUrl("leaf-gold.png"),
+//"../assests/images/leaf-pink.png"
+imageUrl("leaf-pink.png"),
 ];
 
 const leaves = [];
