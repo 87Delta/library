@@ -1,0 +1,15 @@
+.dragon-scene {
+    width: 100%;
+    height: 340px;
+    overflow: hidden;
+}
+
+@media (max-width: 500px) {
+    .dragon-scene {
+        height: 260px;
+    }
+
+    .stats {
+        font-size: 12px;
+    }
+}
