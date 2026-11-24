@@ -129,7 +129,7 @@ leaves.push({
 });
 }
 
-function animate() {
+function animateLeaves() {
 // Smoothly interpolate current wind toward target gust
 wind += (targetWind - wind) * 0.015;
 
@@ -173,9 +173,9 @@ for (let i = leaves.length - 1; i >= 0; i--) {
   }
 }
 
-requestAnimationFrame(animate);
+requestAnimationFrame(animateLeaves);
 }
 
 // Start animation loop and spawn timer
-animate();
+animateLeaves();
 setInterval(spawnLeaf, 400);
