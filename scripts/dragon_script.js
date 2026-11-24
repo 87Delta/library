@@ -403,9 +403,8 @@ ctx.clearRect(0, 0, W, H);
 }
 
 // Main animation loop
-function animateDragons(time) {
-
-requestAnimationFrame(animateDragons);
+function animate(time) {
+requestAnimationFrame(animate);
 const dt = Math.min(
     (time - lastTime) / 1000,
     0.05
@@ -439,6 +438,6 @@ dragons = dragons.filter(dragon =>
 // Start animation
 spawnDragon();
 
-nextSpawn = performance.now() + 85000;
+nextSpawn = performance.now() + 8500;
 
-requestAnimationFrame(animateDragons);
+requestAnimationFrame(animate);
