@@ -1,5 +1,3 @@
-
-
 const canvas = document.getElementById("dragonCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -18,7 +16,6 @@ let nextSpawn = 0;
 
 const random = (min, max) =>
 min + Math.random() * (max - min);
-
 
 // Dragon color variations
 const colors = [
@@ -45,13 +42,10 @@ const colors = [
 }
 ];
 
-
 // Spawn a new dragon
 function spawnDragon() {
-
 const direction =
     Math.random() < 0.5 ? 1 : -1;
-
 const dragon = {
     x: direction === 1 ? -140 : W + 140,
 
@@ -73,22 +67,16 @@ const dragon = {
         Math.floor(random(0, colors.length))
     ]
 };
-
 dragons.push(dragon);
-
 flightCount++;
-
 document.getElementById(
     "flightCount"
 ).textContent = flightCount;
 }
 
-
 // Drawing helper
 function pixel(x, y, width, height, color) {
-
 ctx.fillStyle = color;
-
 ctx.fillRect(
     x,
     y,
@@ -97,45 +85,33 @@ ctx.fillRect(
 );
 }
 
-
 // Polygon drawing helper
 function polygon(points, color) {
-
 ctx.fillStyle = color;
-
 ctx.beginPath();
-
 ctx.moveTo(...points[0]);
 
 for (let i = 1; i < points.length; i++) {
     ctx.lineTo(...points[i]);
 }
-
 ctx.closePath();
-
 ctx.fill();
 }
 
-
 // Draw and animate an individual dragon
 function drawDragon(dragon, dt, time) {
-
 const c = dragon.color;
-
 dragon.phase += dt * 7;
-
 dragon.x +=
     dragon.direction * dt * 66 * speed;
 
 dragon.y += dragon.vy;
-
 if (dragon.y < 55 || dragon.y > 260) {
     dragon.vy *= -1;
 }
 
 // Random fire breathing
 dragon.fireWait -= dt;
-
 if (
     dragon.fireWait <= 0 &&
     dragon.fire <= 0
@@ -151,25 +127,20 @@ if (
         "fireCount"
     ).textContent = fireCount;
 }
-
 if (dragon.fire > 0) {
     dragon.fire -= dt;
 }
 
 // Dragon positioning and direction
 ctx.save();
-
 ctx.translate(dragon.x, dragon.y);
-
 ctx.scale(
     dragon.direction * dragon.scale,
     dragon.scale
 );
 
 const wing = Math.sin(dragon.phase);
-
 const lift = wing * 15;
-
 
 // Tail
 polygon([
@@ -186,12 +157,9 @@ polygon([
     [-69, 17]
 ], c.light);
 
-
 // Rear wing
 ctx.save();
-
 ctx.rotate(wing * 0.10);
-
 polygon([
     [-14, -9],
     [-42, -33 - lift],
@@ -209,19 +177,13 @@ polygon([
 
 ctx.strokeStyle = c.light;
 ctx.lineWidth = 2;
-
 ctx.beginPath();
-
 ctx.moveTo(-14, -8);
 ctx.lineTo(-63, -66 - lift);
-
 ctx.moveTo(-41, -32 - lift);
 ctx.lineTo(-59, -32 - lift);
-
 ctx.stroke();
-
 ctx.restore();
-
 
 // Legs
 polygon([
@@ -238,7 +200,6 @@ polygon([
     [26, 13]
 ], c.dark);
 
-
 // Belly
 polygon([
     [-25, 5],
@@ -249,37 +210,28 @@ polygon([
     [-12, 12]
 ], c.belly);
 
-
 // Main body
 ctx.beginPath();
-
 ctx.ellipse(
     0, 0, 39, 15,
     0, 0, Math.PI * 2
 );
-
 ctx.fillStyle = c.body;
-
 ctx.fill();
-
 
 // Individual scales
 for (let row = 0; row < 3; row++) {
-
     for (let col = 0; col < 7; col++) {
-
         const x =
             -23 + col * 7 + (row % 2) * 3;
 
         const y = -8 + row * 7;
-
         pixel(
             x, y, 3, 2,
             row === 0 ? c.light : c.dark
         );
     }
 }
-
 
 // Neck
 polygon([
@@ -289,7 +241,6 @@ polygon([
     [39, 8],
     [22, 10]
 ], c.body);
-
 
 // Head
 polygon([
@@ -303,7 +254,6 @@ polygon([
     [29, -12]
 ], c.body);
 
-
 // Snout
 polygon([
     [45, -7],
@@ -312,7 +262,6 @@ polygon([
     [62, -1],
     [45, -2]
 ], c.light);
-
 
 // Horns
 polygon([
@@ -327,22 +276,16 @@ polygon([
     [58, -23]
 ], "#e5d5ae");
 
-
 // Eyes
 pixel(53, -17, 5, 4, "#f7df82");
-
 pixel(56, -17, 2, 4, "#241d28");
-
 
 // Nostril
 pixel(64, -9, 2, 2, c.dark);
 
-
 // Front wing
 ctx.save();
-
 ctx.rotate(-wing * 0.12);
-
 polygon([
     [-9, -8],
     [11, -35 - lift],
@@ -363,22 +306,15 @@ polygon([
     [11, -35 - lift],
     [13, -5]
 ], c.dark);
-
 ctx.strokeStyle = c.light;
 ctx.lineWidth = 2;
-
 ctx.beginPath();
-
 ctx.moveTo(-8, -8);
 ctx.lineTo(38, -65 - lift);
-
 ctx.moveTo(11, -35 - lift);
 ctx.lineTo(32, -32 - lift);
-
 ctx.stroke();
-
 ctx.restore();
-
 
 // Feet and claws
 polygon([
@@ -398,20 +334,14 @@ polygon([
 ], c.body);
 
 pixel(-24, 28, 5, 2, "#e6c49b");
-
 pixel(19, 27, 5, 2, "#e6c49b");
-
 
 // Fire breathing animation
 if (dragon.fire > 0) {
-
     const intensity =
         1 - dragon.fire / 0.85;
-
     ctx.save();
-
     ctx.translate(64, -5);
-
     ctx.scale(
         1 + intensity * 0.35,
         1 - intensity * 0.18
@@ -451,66 +381,48 @@ if (dragon.fire > 0) {
 
     // Flying embers
     for (let i = 0; i < 5; i++) {
-
         const ex = random(15, 54);
         const ey = random(-17, 12);
-
         pixel(
             ex, ey, 3, 3,
             i % 2 ? "#ffd35c" : "#ef622e"
         );
     }
-
     ctx.restore();
 }
-
 ctx.restore();
 }
 
-
 // Background drawing
 function drawBackground(time) {
-
 ctx.clearRect(0, 0, W, H);
-
 }
-
 
 // Main animation loop
 function animate(time) {
-
 requestAnimationFrame(animate);
-
 const dt = Math.min(
     (time - lastTime) / 1000,
     0.05
 );
-
 lastTime = time;
-
 if (paused) return;
-
 drawBackground(time);
-
 
 // Automatically spawn dragons
 if (
     time > nextSpawn &&
     dragons.length < 2
 ) {
-
     spawnDragon();
-
     nextSpawn =
-        time + random(8000, 18000);
+    time + random(180000, 400000);
 }
-
 
 // Update all dragons
 dragons.forEach(dragon => {
     drawDragon(dragon, dt, time);
 });
-
 
 // Remove dragons outside the screen
 dragons = dragons.filter(dragon =>
@@ -519,60 +431,9 @@ dragons = dragons.filter(dragon =>
 );
 }
 
-
-// Button controls
-document.getElementById("spawnDragon")
-.addEventListener("click", spawnDragon);
-
-
-document.getElementById("pauseDragon")
-.addEventListener("click", function() {
-
-    paused = !paused;
-
-    this.textContent = paused
-        ? "▶ Resume"
-        : "Ⅱ Pause";
-});
-
-
-document.getElementById("resetDragon")
-.addEventListener("click", function() {
-
-    dragons = [];
-
-    flightCount = 0;
-    fireCount = 0;
-
-    document.getElementById(
-        "flightCount"
-    ).textContent = 0;
-
-    document.getElementById(
-        "fireCount"
-    ).textContent = 0;
-
-    spawnDragon();
-
-    nextSpawn = performance.now() + 8500;
-});
-
-
-// Speed adjustment
-document.getElementById("dragonSpeed")
-.addEventListener("input", function() {
-
-    speed = Number(this.value);
-
-    document.getElementById(
-        "speedLabel"
-    ).textContent = speed.toFixed(1) + "x";
-});
-
-
 // Start animation
 spawnDragon();
 
-nextSpawn = performance.now() + 8500;
+nextSpawn = performance.now() + 85000;
 
 requestAnimationFrame(animate);
