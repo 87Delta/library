@@ -420,7 +420,7 @@ if (
 ) {
     spawnDragon();
     nextSpawn =
-    time + random(180000, 400000);
+    time + random(18000, 40000);
 }
 
 // Update all dragons
